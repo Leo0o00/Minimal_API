@@ -4,7 +4,12 @@ using Minimal_API;
 
 var builder = WebApplication.CreateBuilder(args);
 /*Con este metodo creo la base de datos en memoria*/
-builder.Services.AddDbContext<TareasContext>(p => p.UseInMemoryDatabase("TareasDB"));
+//builder.Services.AddDbContext<TareasContext>(p => p.UseInMemoryDatabase("TareasDB"));
+
+/*Con este metodo creo la base de datos en SqlServer.
+  Los strings de conexion se obtienen de appsettings.json.
+*/
+builder.Services.AddSqlServer<TareasContext>(builder.Configuration.GetConnectionString("conexionTareas"));
 
 var app = builder.Build();
 
